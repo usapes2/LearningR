@@ -145,6 +145,7 @@ df
 
 
 write.csv(tmp, file = "cards.csv", row.names = FALSE)
+# row.names = FALSE no row numbers in the beginning
 getwd()
 
 # Chapter 4 R Notation
@@ -156,3 +157,74 @@ getwd()
 # Logical values
 # Names
 
+
+str(deck)
+head(deck)
+deck[1,1]
+deck[1,c(1,2,3)]
+deck[1:12,c(1,2,3)]
+
+
+typeof(deck[1:2,1,drop = F])
+#use drop = F to keep it as data frame
+
+deck[1:2,1,drop = F]
+
+
+#Negative
+#Negative integers do the exact opposite of positive integers when indexing. R will return
+#every element except the elements in a negative index
+
+deck[-(3:52),1]
+deck[1:2,1]
+
+# Blank Spaces
+#  extract every value in a dimension.
+deck[1,]
+deck[1:3,]
+
+# Logical Values
+
+deck[1,c(TRUE,TRUE,FALSE)]
+str(deck)
+
+# Example with vector
+vec<-c(11,12,13,14,15)
+Shuffle<-sample(1:5,size=5,replace=FALSE)
+Shuffle
+# Shuffle the deck
+random<- sample(1:52,size = 52, replace = FALSE)
+deck4<-deck[random,]
+head(deck4)
+
+shuffle<-function(cards){
+  random<- sample(1:52,size = 52, replace = FALSE)
+  cards[random,]
+}
+deck<-shuffle(deck)
+
+deal <- function(cards){
+  cards[1,]
+}
+deal(deck)
+
+# Dollar Signs and Double Brackets
+#     Two types of object in R obey an optional second system of notation. You can extract
+#     values from data frames and lists with the $ syntax |  write the data frame’s name and the column name
+#     separated by a $
+
+str(deck)
+vec<-1:52
+vec1<-vec[sample(c(TRUE,FALSE),size=52,replace=TRUE)]
+length(vec1)
+
+# When applied to lists
+#When you use the $ notation, R will return the selected values as they are, with no list
+# structure around them:
+
+lst <-list(numbers = c(1,2), logical = TRUE, strings <- c("a","b","c"))
+lst$numbers
+sum(lst$numbers)
+
+sum(lst[1])
+# Note the error
