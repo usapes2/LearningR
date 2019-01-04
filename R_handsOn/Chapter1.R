@@ -228,3 +228,107 @@ sum(lst$numbers)
 
 sum(lst[1])
 # Note the error
+
+#When you use single brackets, R selects individual train cars and
+#returns them as a new train. Each car keeps its contents, but those contents are still
+#inside a train car (i.e., a list). When you use double brackets, R actually unloads the car
+#and gives you back the contents.
+
+lst[1]
+lst[[1]]
+
+typeof(lst[1])
+typeof(lst[[1]])
+
+# Modifying Values
+
+# You can replace multiple values at once as long as the number of new values equals the
+# number of selected values:
+
+vec <- c(1,2,3,4)
+vec
+vec[1:3] <- vec[1:3] + 1
+vec
+
+head(deck)
+
+deck$new <- 1:52
+head(deck)
+
+deck[,2]
+deck[,3]
+
+# remove columns from a data frame (and elements from a list) by assigning
+# them the symbol NULL 
+
+str(deck)
+
+deck$new<-NULL
+str(deck)
+# Subsetting
+
+deck[c(13, 26, 39, 52), 3] # from data set
+# Instead of 3'd column we can do this
+
+deck$value[c(13,26,39,52)]
+
+deck$value[c(13,26,39,52)] <-14
+# or
+deck$value[c(13,26,39,52)] <- c(14,14,14,14)
+
+deck[deck$value == 14,]
+
+# to look at the first ten entires head(deck,10)
+deck3<-shuffle(deck)
+head(deck3,10)
+
+
+# Logical subsetting provides a way to do targeted extraction
+
+vec <- c( 1,2,3,4,5)
+vec[c(T,T,T,F,F)] # subsetting with logical operations
+
+  #>    a > b Is a greater than b?
+  #>=   a >= b Is a greater than or equal to b?
+  #<    a < b Is a less than b?
+  #<=   a <= b Is a less than or equal to b?
+  #==   a == b Is a equal to b?
+  #!=   a != b Is a not equal to b?
+  #%in% a %in% c(a, b, c) Is a in the group c(a, b, c)?
+
+vec
+
+vecBool <- (vec >1) # creates a vector
+vecBool
+
+#  %in% will independently test whether each
+#value on the left is somewhere in the vector on the right
+
+1 %in% c(3, 4, 5)
+## FALSE
+c(1, 2) %in% c(3, 4, 5)
+## FALSE FALSE
+c(1, 2, 3) %in% c(3, 4, 5)
+## FALSE FALSE TRUE
+c(1, 2, 3, 4) %in% c(3, 4, 5)
+## FALSE FALSE TRUE TRUE
+
+str(deck3)
+sum(deck3$face =="ace")
+deck3[deck3$face == "ace","value"]
+deck3[deck3$face == "ace",3]
+deck3$value[deck3$face == "ace" ] <- 100
+deck3
+
+
+
+
+
+
+
+
+
+
+
+
+
