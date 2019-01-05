@@ -317,8 +317,72 @@ str(deck3)
 sum(deck3$face =="ace")
 deck3[deck3$face == "ace","value"]
 deck3[deck3$face == "ace",3]
-deck3$value[deck3$face == "ace" ] <- 100
+deck3$value[deck3$face == "ace" ]
 deck3
+
+# Assign a value of 1 to every card in deck4 that has a suit of hearts
+
+deck3$value[deck3$suit == "hearts" ] <- 1
+deck3$value[deck3$suit == "hearts"]
+
+deck3[deck3$face == "queen",]
+
+
+# Boolean Operators
+
+#  &    cond1 & cond2 Are both cond1 and cond2 true?
+#  |    cond1 pipe cond2 Is one or more of cond1 and cond2 true?
+#  xor  xor(cond1, cond2) Is exactly one of cond1 and cond2 true?
+#  !    !cond1 Is cond1 false? (e.g., ! flips the results of a logical test)
+#  any  any(cond1, cond2, cond3, …) Are any of the conditions true?
+#  all  all(cond1, cond2, cond3, …) Are all of the conditions true?
+
+# Could you use a Boolean operator to locate the queen of spades in your deck?
+
+
+deck[deck$face == "queen" & deck$suit == "spades",3]<-13
+
+deck[deck$face == "queen" & deck$suit == "spades",]
+
+
+# • Is w positive?
+#  • Is x greater than 10 and less than 20?
+#  • Is object y the word February?
+#  • Is every value in z a day of the week?
+w <- c(-1, 0, 1)
+x <- c(5, 15)
+y <- "February"
+z <- c("Monday", "Tuesday", "Friday")
+w>0
+y == "February"
+
+all( z %in% c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+              "Saturday", "Sunday"))
+
+#In blackjack, each number card has a value equal
+#to its face value. Each face card (king, queen, or jack) has a value of 10. Finally, each ace
+#has a value of 11 or 1, depending on the final results of the game.
+
+deck[deck$face %in% c("king","queen","jack"),3] <- 10
+deck[deck$face %in% c("king","queen","jack"),]
+
+head(deck,13)
+
+deck[deck$face == "ace",3] <- 11
+head (deck,20)
+
+
+
+# Missing Information
+
+mean(c(NA, 1:50))
+mean(1:50)
+mean(c(NA, 1:50),na.rm = TRUE) # Ignores rm's inside of the funciton
+
+
+
+
+
 
 
 
