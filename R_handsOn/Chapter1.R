@@ -380,6 +380,126 @@ mean(1:50)
 mean(c(NA, 1:50),na.rm = TRUE) # Ignores rm's inside of the funciton
 
 
+# Which means that tests like this won’t help you find missing values:
+# c(1, 2, 3, NA) == NA
+
+# R supplies a special function that can test whether a value is
+# an NA . The function is sensibly named is.na :
+# is.na(NA)
+vec<-c(1,2,3,NA,5)
+is.na(vec)
+
+vec[is.na(vec)] <- 10000
+
+# In blackjack ace's value depends on the hand
+# lets set all ace's to NA to remind us that and deal with it at the end of the game
+
+deck$value[deck$face == "ace"] <- NA
+
+deck$value[deck$face == "ace"]
+head(deck)
+head(deck,13)
+
+
+# Environments
+
+library(devtools)
+parenvs(all = TRUE) 
+library(pryr)
+parenvs(all = TRUE) 
+
+
+as.environment("package:stats")
+
+#Three environments in your tree also come with their own accessor functions. These
+##are the global environment ( R_GlobalEnv ), the base environment ( base ), and the empty
+#environment ( R_EmptyEnv ). You can refer to them with:
+  globalenv()
+## <environment: R_GlobalEnv>
+baseenv()
+## <environment: base>
+emptyenv()
+##<environment: R_EmptyEnv>
+
+
+#you can look up an environment’s parent with parent.env :
+  parent.env(globalenv())
+
+# You can view the objects saved in an environment with ls or ls.str 
+  ls(globalenv())
+# You can use R’s $ syntax to access an object in a specific environment. For example, you
+# can access deck from the global environment:
+  head(globalenv()$deck, 3)
+
+  
+ # And you can use the assign function to save an object into a particular environment.
+#  First give assign the name of the new object (as a character string). Then give assign
+#  the value of the new object, and finally the environment to save the object in:
+    assign("new", "Hello Global", envir = globalenv())
+  globalenv()$new  
+
+# The Active Enviroment
+ # You can use environment to see the current active environment:
+    environment()
+# Scoping Rules
+
+    # Every time R runs a function, it creates a new active environment to evaluate the function in.
+    # Evaluation
+  
+    environment(deal)
+    
+    deal <- function() {
+      card <- deck[1, ]
+      assign("deck", deck[-1, ], envir = globalenv())
+      card
+    }
+
+    deal()
+str(deck)  
+
+shuffle <- function(cards) {
+  random <- sample(1:52, size = 52)
+  cards[random, ]
+}
+
+DECK <-deck
+
+shuffle <- function() {
+  indx <- sample(1:52,size = 52, replace = FALSE)
+  assign("deck", DECK[indx, ], envir = globalenv())
+}
+
+deal()
+shuffle()
+# Closures
+
+setup <- function(deck) {
+  DECK <- deck
+  
+  SHUFFLE <- function(){
+    indx <- sample(1:52,size = 52, replace = FALSE)
+    assign("deck", DECK[indx, ], envir = parent.env(environment()))
+  }
+  
+  DEAL <- function(){
+    card <- deck[1,]
+    assign("deck", deck[-1, ], envir = parent.env(environment()))
+    card
+  }
+  list(shuffle = SHUFFLE, deal = DEAL)
+}
+
+game <- setup(deck)
+deal <- game$deal
+shuffle <- game$shuffle
+
+rm(deck)
+
+deal()
+shuffle()
+
+ls.str(environment(deal))
+deal()
 
 
 
@@ -395,4 +515,5 @@ mean(c(NA, 1:50),na.rm = TRUE) # Ignores rm's inside of the funciton
 
 
 
+  
 
