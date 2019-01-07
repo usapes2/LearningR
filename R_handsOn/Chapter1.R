@@ -499,8 +499,40 @@ deal()
 shuffle()
 
 ls.str(environment(deal))
-deal()
+deal
 
+
+# Project 3: Slot Machine
+
+#• Use a practical strategy to design programs
+#• Use if and else statements to tell R what to do when
+#• Create lookup tables to find values
+#• Use for , while , and repeat loops to automate repetitive operations
+#• Use S3 methods, R’s version of Object-Oriented Programming
+#• Measure the speed of R code
+#• Write fast, vectorized R code
+
+#play()
+## 7 7 7
+## $80
+#The play function will need to do two things. First, it will need to randomly generate
+#three symbols; and, second, it will need to calculate a prize based on those symbols.
+
+get_symbols <- function() {
+  wheel <- c("DD", "7", "BBB", "BB", "B", "C", "0")
+  sample(wheel, size = 3, replace = TRUE,
+           prob = c(0.03, 0.03, 0.06, 0.1, 0.25, 0.01, 0.52))
+}
+sum(c(0.03, 0.03, 0.06, 0.1, 0.25, 0.01, 0.52)) # Note that probabilites add to 1
+#diamonds ( DD ), sevens ( 7 ), triple bars ( BBB ), double bars ( BB ), single bars ( B ), cherries ( C ),
+#and zeroes ( 0 )
+
+
+get_symbols()
+
+a <- 3.14
+a <- a - trunc(a)
+a
 
 
 
