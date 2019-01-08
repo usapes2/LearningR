@@ -535,8 +535,16 @@ a <- a - trunc(a)
 a
 
 
+# Lookup Tables
 
+payouts <- c("DD" = 100, "7" = 80, "BBB" = 40, "BB" = 25,
+             "B" = 10, "C" = 10, "0" = 0)
 
+payouts["DD"]
+
+# If you want to leave behind the symbol’s name when subsetting, you can run the un
+# name function on the output:
+  unname(payouts["DD"])
 
 
 
