@@ -528,7 +528,7 @@ sum(c(0.03, 0.03, 0.06, 0.1, 0.25, 0.01, 0.52)) # Note that probabilites add to 
 #and zeroes ( 0 )
 
 
-get_symbols()
+symbols <- get_symbols()
 
 a <- 3.14
 a <- a - trunc(a)
@@ -545,15 +545,54 @@ payouts["DD"]
 # If you want to leave behind the symbol’s name when subsetting, you can run the un
 # name function on the output:
   unname(payouts["DD"])
+# payouts is a type of lookup table
+  
+  
+  
+# To get the score
+
+  score <- function(symbols) {
+    # calculate a prize
+    prize
+  }
+
+# if else statements 
+  
+  symbols[1] == symbols[2] & symbols[2] == symbols[3]
+  ## TRUE
+  symbols[1] == symbols[2] & symbols[1] == symbols[3]
+  ## TRUE
+  all(symbols == symbols[1])
+  ## TRUE
+  
+    length(unique(symbols)) == 1
+    
+# The unique function returns every unique term that appears in a vector
+
+    test <- c(1,1,1)
+    unique(test)
+    
+    test <- c(1,2,3)
+    unique(test)
 
 
+    same <- symbols[1] == symbols[2] && symbols[2] == symbols[3]
 
 
+#    if (same) {
+#      prize <- # look up the prize
+#    } else if ( # Case 2: all bars ) {
+#      prize <- # assign $5
+#      } else {
+#        # count cherries
+#        prize <- # calculate a prize
+#      }
+# count diamonds
+# double the prize if necessary
 
-
-
-
-
+    
+    bars <- symbols %in% c("B", "BB", "BBB")
+   # else if (all(bars)) {
 
   
 
