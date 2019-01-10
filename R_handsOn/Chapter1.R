@@ -594,5 +594,56 @@ payouts["DD"]
     bars <- symbols %in% c("B", "BB", "BBB")
    # else if (all(bars)) {
 
+  # Using everything we have learnt so far we can write 
+    
+  #  if (same) {
+  #    payouts <- c("DD" = 100, "7" = 80, "BBB" = 40, "BB" = 25,
+  #                 "B" = 10, "C" = 10, "0" = 0)
+  #    prize <- unname(payouts[symbols[1]])
+    
+    #else if (all(bars)) {
+    #  prize <- 5
+  symbols <- get_symbols()
+  cherries <- sum("C" == symbols) # counting number of cherries
+  sum("DD" == symbols) # counting number of diamonds
   
+  
+  #We know that our prize should be $0 if we have no cherries, $2 if we have one cherry,
+  #and $5 if we have two cherries. You can create a vector that contains this information.
+  #This will be a very simple lookup table:
+  #  c(0, 2, 5)
+  
+  #cherries isn’t exactly suited for integer subsetting because it could contain a zero, but
+  #that’s easy to fix. We can subset with cherries + 1 . Now when cherries equals zero,
+  #we have:
+  #  cherries + 1
+  
+#  c(0, 2, 5)[cherries + 1]
 
+score <- function (symbols) {
+# Define cases
+  same <- symbols[1] == symbols[2] && symbols[2] == symbols[3]
+  bars <- symbols %in% c("B", "BB", "BBB")
+  
+# Get the score
+  if (same) {
+    payouts <- c("DD" = 100, "7" = 80, "BBB" = 40, "BB" = 25,
+                 "B" = 10, "C" = 10, "0" = 0)
+    prize <- unname(payouts[symbols[1]])
+  } else if (all(bars)) {
+    prize <- 5
+  } else {
+    cherries <- sum(symbols == "C")
+    prize <- c(0, 2, 5)[cherries + 1]
+  }
+# Adjust for diamonds
+  diamonds <- sum(symbols == "DD")  
+  prize * 2 ^ diamonds
+  
+  }
+play <- function() {
+  symbols<-get_symbols()
+  print(symbols)
+  score(symbols)
+}  
+play()
